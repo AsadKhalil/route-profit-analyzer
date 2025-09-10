@@ -14,16 +14,262 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      customers: {
+        Row: {
+          created_at: string
+          customer_id: string
+          customer_name: string | null
+          customer_name_code: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          customer_id: string
+          customer_name?: string | null
+          customer_name_code: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          customer_id?: string
+          customer_name?: string | null
+          customer_name_code?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          role: Database["public"]["Enums"]["user_role"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      suppliers: {
+        Row: {
+          created_at: string
+          id: string
+          supplier_id: string
+          supplier_name: string | null
+          supplier_name_code: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          supplier_id: string
+          supplier_name?: string | null
+          supplier_name_code: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          supplier_id?: string
+          supplier_name?: string | null
+          supplier_name_code?: string
+        }
+        Relationships: []
+      }
+      trips: {
+        Row: {
+          actual_eta: string | null
+          booking_date: string
+          booking_id: string
+          created_at: string
+          current_lat: number | null
+          current_location: string | null
+          current_lon: number | null
+          customer_id: string | null
+          customer_name_code: string | null
+          data_ping_time: string | null
+          delay_minutes: number | null
+          destination_lat_lon: string | null
+          destination_location: string
+          destination_location_code: string | null
+          driver_mobile_no: string | null
+          driver_name: string | null
+          fuel_cost: number | null
+          gps_provider: string | null
+          id: string
+          minimum_kms_per_day: number | null
+          on_time: boolean | null
+          origin_lat_lon: string | null
+          origin_location: string
+          origin_location_code: string | null
+          planned_eta: string | null
+          profit: number | null
+          revenue: number | null
+          supplier_id: string | null
+          supplier_name_code: string | null
+          transportation_distance_km: number | null
+          trip_end_date: string | null
+          trip_start_date: string | null
+          trip_type: string | null
+          updated_at: string
+          user_id: string
+          vehicle_no: string | null
+          vehicle_type: string | null
+        }
+        Insert: {
+          actual_eta?: string | null
+          booking_date: string
+          booking_id: string
+          created_at?: string
+          current_lat?: number | null
+          current_location?: string | null
+          current_lon?: number | null
+          customer_id?: string | null
+          customer_name_code?: string | null
+          data_ping_time?: string | null
+          delay_minutes?: number | null
+          destination_lat_lon?: string | null
+          destination_location: string
+          destination_location_code?: string | null
+          driver_mobile_no?: string | null
+          driver_name?: string | null
+          fuel_cost?: number | null
+          gps_provider?: string | null
+          id?: string
+          minimum_kms_per_day?: number | null
+          on_time?: boolean | null
+          origin_lat_lon?: string | null
+          origin_location: string
+          origin_location_code?: string | null
+          planned_eta?: string | null
+          profit?: number | null
+          revenue?: number | null
+          supplier_id?: string | null
+          supplier_name_code?: string | null
+          transportation_distance_km?: number | null
+          trip_end_date?: string | null
+          trip_start_date?: string | null
+          trip_type?: string | null
+          updated_at?: string
+          user_id: string
+          vehicle_no?: string | null
+          vehicle_type?: string | null
+        }
+        Update: {
+          actual_eta?: string | null
+          booking_date?: string
+          booking_id?: string
+          created_at?: string
+          current_lat?: number | null
+          current_location?: string | null
+          current_lon?: number | null
+          customer_id?: string | null
+          customer_name_code?: string | null
+          data_ping_time?: string | null
+          delay_minutes?: number | null
+          destination_lat_lon?: string | null
+          destination_location?: string
+          destination_location_code?: string | null
+          driver_mobile_no?: string | null
+          driver_name?: string | null
+          fuel_cost?: number | null
+          gps_provider?: string | null
+          id?: string
+          minimum_kms_per_day?: number | null
+          on_time?: boolean | null
+          origin_lat_lon?: string | null
+          origin_location?: string
+          origin_location_code?: string | null
+          planned_eta?: string | null
+          profit?: number | null
+          revenue?: number | null
+          supplier_id?: string | null
+          supplier_name_code?: string | null
+          transportation_distance_km?: number | null
+          trip_end_date?: string | null
+          trip_start_date?: string | null
+          trip_type?: string | null
+          updated_at?: string
+          user_id?: string
+          vehicle_no?: string | null
+          vehicle_type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "trips_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["customer_id"]
+          },
+          {
+            foreignKeyName: "trips_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "suppliers"
+            referencedColumns: ["supplier_id"]
+          },
+          {
+            foreignKeyName: "trips_vehicle_no_fkey"
+            columns: ["vehicle_no"]
+            isOneToOne: false
+            referencedRelation: "vehicles"
+            referencedColumns: ["vehicle_no"]
+          },
+        ]
+      }
+      vehicles: {
+        Row: {
+          created_at: string
+          id: string
+          minimum_kms_per_day: number | null
+          vehicle_no: string
+          vehicle_type: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          minimum_kms_per_day?: number | null
+          vehicle_no: string
+          vehicle_type?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          minimum_kms_per_day?: number | null
+          vehicle_no?: string
+          vehicle_type?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_user_role: {
+        Args: { user_uuid: string }
+        Returns: Database["public"]["Enums"]["user_role"]
+      }
     }
     Enums: {
-      [_ in never]: never
+      user_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +396,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      user_role: ["admin", "user"],
+    },
   },
 } as const
