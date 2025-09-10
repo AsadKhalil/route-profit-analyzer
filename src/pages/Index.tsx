@@ -1,14 +1,30 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { LoginForm } from "@/components/ui/login-form";
+import { AdminDashboard } from "@/components/dashboard/admin-dashboard";
+import { UserDashboard } from "@/components/dashboard/user-dashboard";
+
+type UserRole = 'admin' | 'user' | null;
 
 const Index = () => {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
+  const [userRole, setUserRole] = useState<UserRole>(null);
+
+  const handleLogin = (role: UserRole) => {
+    setUserRole(role);
+  };
+
+  const handleLogout = () => {
+    setUserRole(null);
+  };
+
+  if (!userRole) {
+    return <LoginForm onLogin={handleLogin} />;
+  }
+
+  if (userRole === 'admin') {
+    return <AdminDashboard onLogout={handleLogout} />;
+  }
+
+  return <UserDashboard onLogout={handleLogout} />;
 };
 
 export default Index;
