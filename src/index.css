@@ -56,8 +56,9 @@ All colors MUST be HSL.
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(203 89% 53%), hsl(203 89% 43%));
     --gradient-secondary: linear-gradient(135deg, hsl(148 60% 55%), hsl(148 60% 45%));
-    --gradient-hero: linear-gradient(135deg, hsl(203 89% 53%) 0%, hsl(148 60% 55%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(220 70% 50%) 0%, hsl(200 80% 60%) 100%);
     --gradient-card: linear-gradient(145deg, hsl(255 255 255) 0%, hsl(248 250 252) 100%);
+    --gradient-login: linear-gradient(135deg, hsl(220 70% 50%) 0%, hsl(180 70% 50%) 50%, hsl(200 80% 60%) 100%);
 
     /* Shadows */
     --shadow-logistics: 0 10px 25px -5px hsl(203 89% 53% / 0.1), 0 4px 6px -2px hsl(203 89% 53% / 0.05);
@@ -139,7 +140,7 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+    background: linear-gradient(135deg, hsl(220 70% 50%) 0%, hsl(180 70% 50%) 50%, hsl(200 80% 60%) 100%);
     min-height: 100vh;
   }
 
@@ -172,6 +173,10 @@ All colors MUST be HSL.
     background: var(--gradient-hero);
   }
   
+  .login-gradient {
+    background: var(--gradient-login);
+  }
+  
   .card-gradient {
     background: var(--gradient-card);
   }
@@ -191,5 +196,28 @@ All colors MUST be HSL.
   .hover-shadow:hover {
     box-shadow: var(--shadow-hover);
     transform: translateY(-2px);
+  }
+  
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Force override any yellow colors */
+  input, textarea, select {
+    background-color: white !important;
+    color: #374151 !important;
+    border-color: #e5e7eb !important;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1) !important;
+  }
+  
+  /* Remove any yellow backgrounds */
+  *[style*="yellow"], *[style*="#ffff"], *[style*="#ff0"] {
+    background: white !important;
   }
 }

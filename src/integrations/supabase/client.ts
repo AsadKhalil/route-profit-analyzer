@@ -2,8 +2,12 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = "https://masffldtxhcfjrbsqbeo.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hc2ZmbGR0eGhjZmpyYnNxYmVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc0OTkwNDAsImV4cCI6MjA3MzA3NTA0MH0.VFXZ3HL4LVppq3HXwCvBD0fCPevv64aBTl5Zcxttiyw";
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || "https://masffldtxhcfjrbsqbeo.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hc2ZmbGR0eGhjZmpyYnNxYmVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc0OTkwNDAsImV4cCI6MjA3MzA3NTA0MH0.VFXZ3HL4LVppq3HXwCvBD0fCPevv64aBTl5Zcxttiyw";
+
+// Debug: Log the values to check if env vars are loaded
+console.log('Supabase URL:', SUPABASE_URL);
+console.log('Supabase Key:', SUPABASE_PUBLISHABLE_KEY ? 'Loaded' : 'Not loaded');
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";

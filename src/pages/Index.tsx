@@ -1,30 +1,34 @@
-import { useState } from "react";
-import { LoginForm } from "@/components/ui/login-form";
+import { DirectTestLogin } from "@/components/auth/DirectTestLogin";
 import { AdminDashboard } from "@/components/dashboard/admin-dashboard";
 import { UserDashboard } from "@/components/dashboard/user-dashboard";
-
-type UserRole = 'admin' | 'user' | null;
+import { useAuth } from "@/hooks/useAuth";
+import { Loader2 } from "lucide-react";
 
 const Index = () => {
-  const [userRole, setUserRole] = useState<UserRole>(null);
+  const { user, profile, loading } = useAuth();
 
-  const handleLogin = (role: UserRole) => {
-    setUserRole(role);
-  };
-
-  const handleLogout = () => {
-    setUserRole(null);
-  };
-
-  if (!userRole) {
-    return <LoginForm onLogin={handleLogin} />;
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{
+        background: 'linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #0891b2 100%)'
+      }}>
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-white" />
+          <p className="text-white">Loading...</p>
+        </div>
+      </div>
+    );
   }
 
-  if (userRole === 'admin') {
-    return <AdminDashboard onLogout={handleLogout} />;
+  if (!user || !profile) {
+    return <DirectTestLogin />;
   }
 
-  return <UserDashboard onLogout={handleLogout} />;
+  if (profile.role === 'admin') {
+    return <AdminDashboard />;
+  }
+
+  return <UserDashboard />;
 };
 
 export default Index;
